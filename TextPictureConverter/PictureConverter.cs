@@ -21,13 +21,17 @@ namespace TextPictureConverter
             float[] brightnessValues = new float[Picture.Height];
             float finalBrightnessValue = FindBrightnessValues(Picture, brightnessValues);
 
-            float upperBound = finalBrightnessValue;
-            float bottomBound = finalBrightnessValue;
-            Dictionary<int, int> Bounds = FillDictionary(Picture, brightnessValues, upperBound, bottomBound);
-
+            Dictionary<int, int> Bounds = FillDictionary(Picture, brightnessValues, finalBrightnessValue);
 
             int minHeight = FindMinHeight(Bounds);
 
+            var lines = GetLines(minHeight, Bounds);
+
+            return lines.ToArray();
+        }
+
+        private List<Bitmap> GetLines(int minHeight, Dictionary<int, int> Bounds)
+        {
             var lines = new List<Bitmap>();
             int deltaHeight = (int)(minHeight * 0.7);
             foreach (var bound in Bounds)
@@ -49,7 +53,7 @@ namespace TextPictureConverter
                 }
                 lines.Add(line);
             }
-            return lines.ToArray(); 
+            return lines;
         }
 
         private float FindBrightnessValues(Bitmap bitmap, float[] brightnessValues)
@@ -59,8 +63,7 @@ namespace TextPictureConverter
             {
                 for (int j = 0; j < bitmap.Width; j++)
                 {
-                    var pixel = bitmap.GetPixel(j, i);
-                    brightnessValues[i] += (float)(0.212 * pixel.R + 0.715 * pixel.G + 0.072 * pixel.B);
+                    brightnessValues[i] += bitmap.GetPixel(j, i).GetBrightness();
                 }
                 brightnessValues[i] /= bitmap.Width;
                 finalBrightnessValue += brightnessValues[i];
@@ -68,7 +71,7 @@ namespace TextPictureConverter
             return (finalBrightnessValue / bitmap.Height);
         }
 
-        private Dictionary<int, int> FillDictionary(Bitmap bitmap, float[] brightnessValues, float upperBound, float bottomBound)
+        private Dictionary<int, int> FillDictionary(Bitmap bitmap, float[] brightnessValues, float finalBrightnessValue)
         {
             Dictionary<int, int> Bounds = new Dictionary<int, int>();
             bool isUpperBoundStarted = false;
@@ -77,30 +80,39 @@ namespace TextPictureConverter
             {
 
                 if (!isUpperBoundStarted
-                 && (brightnessValues[i - 2] > upperBound)
-                 && (brightnessValues[i - 1] > upperBound)
-                 && (brightnessValues[i] < bottomBound)
-                 && (brightnessValues[i + 1] < bottomBound)
-                 && (brightnessValues[i + 2] < bottomBound)
-                 && (brightnessValues[i + 3] < bottomBound))
+                 && UpperBoundConditions(brightnessValues, finalBrightnessValue, i))
                 {
                     key = i;
                     isUpperBoundStarted = true;
                 }
 
-                if ((isUpperBoundStarted
-                  && brightnessValues[i] < upperBound
-                  && brightnessValues[i + 1] > bottomBound)
-                  || (isUpperBoundStarted
-                  && brightnessValues[i + 1] > bottomBound
-                  && brightnessValues[i + 2] > bottomBound
-                  && brightnessValues[i + 3] > bottomBound))
+                if (isUpperBoundStarted
+                  && BottomBoundConditions(brightnessValues, finalBrightnessValue, i))
                 {
                     Bounds.Add(key, i);
                     isUpperBoundStarted = false;
                 }
             }
             return Bounds;
+        }
+
+        private bool UpperBoundConditions(float[] brightnessValues, float finalBrightnessValue, int index)
+        {
+            return (brightnessValues[index - 2] > finalBrightnessValue)
+                 && (brightnessValues[index - 1] > finalBrightnessValue)
+                 && (brightnessValues[index] < finalBrightnessValue)
+                 && (brightnessValues[index + 1] < finalBrightnessValue)
+                 && (brightnessValues[index + 2] < finalBrightnessValue)
+                 && (brightnessValues[index + 3] < finalBrightnessValue);
+        }
+
+        private bool BottomBoundConditions(float[] brightnessValues, float finalBrightnessValue, int index)
+        {
+            return (brightnessValues[index] < finalBrightnessValue
+                  && brightnessValues[index + 1] > finalBrightnessValue)
+                  || (brightnessValues[index + 1] > finalBrightnessValue
+                  && brightnessValues[index + 2] > finalBrightnessValue
+                  && brightnessValues[index + 3] > finalBrightnessValue);
         }
 
         private int FindMinHeight(Dictionary<int, int> Bounds)

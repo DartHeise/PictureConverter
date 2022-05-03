@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Иван\\Desktop\\PictureConverter\\TextPictureConverter\\TextPictureConverter.csproj": {}
+    "C:\\Users\\Иван\\Desktop\\Feature\\PictureConverter\\TextPictureConverter\\TextPictureConverter.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Иван\\Desktop\\PictureConverter\\TextPictureConverter\\TextPictureConverter.csproj": {
+    "C:\\Users\\Иван\\Desktop\\Feature\\PictureConverter\\TextPictureConverter\\TextPictureConverter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Иван\\Desktop\\PictureConverter\\TextPictureConverter\\TextPictureConverter.csproj",
+        "projectUniqueName": "C:\\Users\\Иван\\Desktop\\Feature\\PictureConverter\\TextPictureConverter\\TextPictureConverter.csproj",
         "projectName": "TextPictureConverter",
-        "projectPath": "C:\\Users\\Иван\\Desktop\\PictureConverter\\TextPictureConverter\\TextPictureConverter.csproj",
+        "projectPath": "C:\\Users\\Иван\\Desktop\\Feature\\PictureConverter\\TextPictureConverter\\TextPictureConverter.csproj",
         "packagesPath": "C:\\Users\\Иван\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Иван\\Desktop\\PictureConverter\\TextPictureConverter\\obj\\",
+        "outputPath": "C:\\Users\\Иван\\Desktop\\Feature\\PictureConverter\\TextPictureConverter\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Иван\\AppData\\Roaming\\NuGet\\NuGet.Config",
