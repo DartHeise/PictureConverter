@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7CakP6V1+D0QFo6RQ9i8TgIyQbTmSQSFmEQBflIyYIoZgR/3YYGE3BpCHN9cNwI1hj9HlNBgmxLQIi1AqY6Rug==",
+  "dgSpecHash": "AOXknOJkvoLa5sXs+kGc0hOOUOeQESk1gtEIVy/cajUs4mJV7Eo86IOHw1z5eHal1CdzVleeORwXvMszpZz7PA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Иван\\Desktop\\PictureConverter\\TextPictureConverter\\TextPictureConverter.csproj",
+  "projectFilePath": "C:\\Users\\Иван\\Desktop\\Feature\\PictureConverter\\TextPictureConverter\\TextPictureConverter.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Иван\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Иван\\.nuget\\packages\\system.drawing.common\\6.0.0\\system.drawing.common.6.0.0.nupkg.sha512"
